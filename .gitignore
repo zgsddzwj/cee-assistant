@@ -1,0 +1,96 @@
+# 依赖目录
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+
+# 构建输出
+dist/
+build/
+*.egg-info/
+
+# 日志文件
+*.log
+logs/
+
+# 环境变量和敏感配置
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# IDE 和编辑器
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# 测试覆盖率
+coverage/
+htmlcov/
+.pytest_cache/
+
+# 缓存
+.cache/
+*.cache
+
+# 临时文件
+tmp/
+temp/
+*.tmp
+
+# 数据库文件
+*.db
+*.sqlite
+*.sqlite3
+
+# 大型数据文件（应该通过其他方式管理）
+*.csv
+*.xlsx
+*.parquet
+
+# 模型权重和大文件
+*.pkl
+*.pth
+*.onnx
+*.h5
+
+# 前端特定
+.pnpm-debug.log*
+.yarn-integrity
+.eslintcache
+.stylelintcache
+
+# Python 特定
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.nox/
+
+# 文档构建
+docs/_build/
+
+# 本地开发配置
+vite.config.ts.timestamp-*
+
+# Superpowers 技能目录
+.superpowers/
+
+# 数据采集生成的数据文件（模拟数据，不应提交到版本控制）
+data/
+*.json
+!package.json
+!package-lock.json
+!tsconfig.json
+!pyproject.toml
+!*.config.json
+
+# 爬虫缓存和日志
+scrapy_cache/
+.downloads/
+

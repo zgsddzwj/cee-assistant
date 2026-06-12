@@ -1,0 +1,76 @@
+[project]
+name = "cee-data-collector"
+version = "0.1.0"
+description = "高考志愿填报数据采集系统 - 混合式高考数据采集"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [
+    {name = "CEE Assistant Team"},
+]
+keywords = ["cee", "education", "data-collection", "web-scraping"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    # Core dependencies
+    "requests>=2.31.0",
+    "beautifulsoup4>=4.12.2",
+    "lxml>=4.9.3",
+    # Scrapy framework
+    "Scrapy>=2.11.0",
+    "selenium>=4.15.0",
+    # Database and storage
+    "psycopg2-binary>=2.9.7",
+    "redis>=5.0.1",
+    "minio>=7.2.0",
+    # Data processing
+    "pandas>=2.1.4",
+    "great-expectations>=0.18.0",
+    "numpy>=1.26.2",
+    # Configuration and scheduling
+    "APScheduler>=3.10.4",
+    "python-dotenv>=1.0.0",
+    "pydantic>=2.5.3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.4",
+    "pytest-cov>=4.1.0",
+    "flake8>=6.1.0",
+    "black>=23.0.0",
+]
+
+[project.scripts]
+cee-collect = "core.scheduler:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["core", "spiders"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+python-downloads = "automatic"
+
+[tool.black]
+line-length = 100
+target-version = ['py38']
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
