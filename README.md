@@ -239,3 +239,39 @@ MIT License
 <p align="center">
   Made with ❤️ for CEE Candidates
 </p>
+
+---
+
+## 更新日志
+
+### v1.1.0 (2024-06)
+- 新增数据比对和差异分析功能
+- 新增数据可视化报表（HTML趋势图）
+- 新增院校搜索和筛选服务
+- 新增专业推荐算法（冲/稳/保）
+- 新增分数线趋势分析
+- 新增用户偏好配置管理
+- 新增数据备份和恢复功能
+- 新增 FastAPI RESTful API
+- 新增 Docker 容器化支持
+- 完善项目文档和示例
+
+### v1.0.0 (2024-06)
+- 初始版本发布
+- 完成数据采集层（考试院爬虫、院校爬虫）
+- 完成推荐引擎（规则引擎、协同过滤）
+- 完成智能咨询 Agent（意图识别、对话管理）
+- 完成前端交互层（React + TypeScript）
+- 生成模拟数据（31省市、50院校、600+专业）
+
+## 贡献者
+
+感谢所有为项目做出贡献的开发者：
+
+- [CEE Assistant Team](https://github.com/zgsddzwj)
+
+## 相关链接
+
+- [项目主页](https://github.com/zgsddzwj/cee-assistant)
+- [问题反馈](https://github.com/zgsddzwj/cee-assistant/issues)
+- [更新日志](https://github.com/zgsddzwj/cee-assistant/releases)
