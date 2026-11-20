@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useCallback } from 'react'
 import { Send, Loader2 } from 'lucide-react'
 
 function ChatInput({
@@ -9,12 +9,22 @@ function ChatInput({
   disabled?: boolean
 }) {
   const [input, setInput] = useState('')
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
+
+  const autoResize = useCallback(() => {
+    const textarea = textareaRef.current
+    if (textarea) {
+      textarea.style.height = 'auto'
+      textarea.style.height = `${Math.min(textarea.scrollHeight, 128)}px`
+    }
+  }, [])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (input.trim() && !disabled) {
       onSend(input.trim())
       setInput('')
+      requestAnimationFrame(autoResize)
     }
   }
 
@@ -22,8 +32,12 @@ function ChatInput({
     <form onSubmit={handleSubmit} className="relative">
       <div className="flex items-end gap-2 bg-white border rounded-2xl p-2 shadow-sm focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all">
         <textarea
+          ref={textareaRef}
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e) => {
+            setInput(e.target.value)
+            autoResize()
+          }}
           onKeyDown={(e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
               e.preventDefault()
@@ -33,8 +47,7 @@ function ChatInput({
           placeholder="请输入您的问题，例如：我考了600分，想报计算机专业..."
           disabled={disabled}
           rows={1}
-          className="flex-1 px-3 py-2.5 resize-none outline-none text-sm max-h-32 min-h-[44px]"
-          style={{ height: 'auto' }}
+          className="flex-1 px-3 py-2.5 resize-none outline-none text-sm max-h-32 min-h-[44px] overflow-y-auto"
         />
         <button
           type="submit"
