@@ -150,13 +150,16 @@ class CacheManager:
     
     def clear(self):
         """清空所有缓存"""
+        # 先保存键列表，再清空（避免清空后无法遍历删除 Redis 键）
+        metadata_keys = list(self._cache_metadata.keys())
+
         self._memory_cache.clear()
         self._cache_metadata.clear()
         
         if self.redis:
             try:
                 # 只删除当前应用的缓存键
-                for key in list(self._cache_metadata.keys()):
+                for key in metadata_keys:
                     self.redis.delete(key)
             except Exception as e:
                 logger.warning(f"[Cache] Redis clear error: {e}")
