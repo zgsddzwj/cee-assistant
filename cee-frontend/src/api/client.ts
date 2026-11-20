@@ -16,4 +16,22 @@ apiClient.interceptors.request.use((config) => {
   return config
 })
 
+apiClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response) {
+      const { status } = error.response
+      if (status === 401) {
+        localStorage.removeItem('token')
+        window.location.href = '/login'
+      }
+    } else if (error.code === 'ECONNABORTED') {
+      console.error('请求超时，请检查网络连接后重试')
+    } else {
+      console.error('网络异常，请稍后重试')
+    }
+    return Promise.reject(error)
+  }
+)
+
 export default apiClient
