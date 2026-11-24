@@ -17,6 +17,15 @@ class IntentClassifier:
         IntentType.GENERAL_CHAT: ["你好", "谢谢", "紧张", "害怕", "担心"]
     }
 
+    # 需要调用工具的意图集合
+    TOOL_INTENTS = frozenset([
+        IntentType.QUERY_SCORE,
+        IntentType.QUERY_MAJOR,
+        IntentType.QUERY_COLLEGE,
+        IntentType.RECOMMENDATION,
+        IntentType.COMPARISON
+    ])
+
     def classify(self, user_input: str, context: Optional[dict] = None) -> IntentType:
         """识别用户意图"""
         user_input = user_input.lower()
@@ -37,11 +46,4 @@ class IntentClassifier:
 
     def requires_tool(self, intent: IntentType) -> bool:
         """判断意图是否需要调用工具"""
-        tool_intents = [
-            IntentType.QUERY_SCORE,
-            IntentType.QUERY_MAJOR,
-            IntentType.QUERY_COLLEGE,
-            IntentType.RECOMMENDATION,
-            IntentType.COMPARISON
-        ]
-        return intent in tool_intents
+        return intent in self.TOOL_INTENTS
