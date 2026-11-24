@@ -1,3 +1,4 @@
+import { useRef, useEffect } from 'react'
 import { useChatStore } from '@/stores/chatStore'
 import ChatMessage from '@/components/chat/ChatMessage'
 import ChatInput from '@/components/chat/ChatInput'
@@ -5,6 +6,11 @@ import { GraduationCap, Sparkles } from 'lucide-react'
 
 function ChatPage() {
   const { messages, isLoading, addMessage, setLoading } = useChatStore()
+  const messagesEndRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages, isLoading])
 
   const handleSend = async (text: string) => {
     const userMsg = {
@@ -86,6 +92,7 @@ function ChatPage() {
             <span className="ml-1">正在分析...</span>
           </div>
         )}
+        <div ref={messagesEndRef} />
       </div>
 
       {/* Input */}
